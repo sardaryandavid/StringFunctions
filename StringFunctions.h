@@ -7,9 +7,9 @@ int convertToNumber(const char* str, const int stringLength);
 
 int isDigit(const char symbol);
 
-void myItoa(int number, char * str);
+void myItoa(int number, char * str, int base);
 
-int amountOfNumbers(int number);
+int amountOfDigits(int number);
 
 int myStrcmp(const char* firstString, const char* secondString);
 

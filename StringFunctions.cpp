@@ -26,7 +26,7 @@ int convertToNumber(const char* enteredString, const int stringLength) {
         }
 
         returningNumber *= 10;
-        returningNumber += int(enteredString[stringPointer] - '0');
+        returningNumber += enteredString[stringPointer] - '0';
     }
 
     return returningNumber;
@@ -40,8 +40,8 @@ int isDigit(const char symbol) {
     return 0;
 }
 
-void myItoa(int number, char* resultString) {
-    int digitsAmount = amountOfNumbers(number);
+void myItoa(int number, char* resultString, int base) {
+    int digitsAmount = amountOfDigits(number);
 
     int endOfDigits = digitsAmount;
 
@@ -50,18 +50,16 @@ void myItoa(int number, char* resultString) {
     }
 
     for(int index = 0; index < endOfDigits; ++index) {
-        int digit = abs(number) / pow(10, digitsAmount - 1);
+        int digit = abs(number) / pow(base, digitsAmount - 1);
 
         *resultString++ = digit + '0';
 
-        number = number % int(pow(10, digitsAmount - 1));
+        number = number % int(pow(base, digitsAmount - 1));
         --digitsAmount;
     }
 }
 
-int amountOfNumbers(int number) {
-    assert(std::isfinite(number));
-
+int amountOfDigits(int number) {
     if (number == 0) {
         return 1;
     }
@@ -91,30 +89,14 @@ int myStrcmp(const char* firstString, const char* secondString) {
         ++index;
     }
 
-    if(strlen(firstString) > strlen(secondString)) {
-        return 1;
-    }
-
-    if(strlen(firstString) < strlen(secondString)) {
-        return -1;
-    }
-
-    return 0;
+    return strlen(firstString) - strlen(secondString);
 }
 
 int myPuts(const char* str) {
     if (str != nullptr) {
-        for(int index = 0; index < strlen(str); ++index) {
-            printf("%c", str[index]);
+            printf("%s\n", str);
         }
-        printf("\n");
-    }
 
     return EOF;
 }
-
-
-
-
-
 
