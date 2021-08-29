@@ -6,8 +6,6 @@
 
 //#define TESTS
 
-
-
 void launchProgram();
 
 int main()
@@ -22,7 +20,7 @@ int main()
 }
 
 void launchProgram() {
-    printf("Use functions from StringFunctions! /%)");
+    printf("Use functions from StringFunctions!");
 }
 
 

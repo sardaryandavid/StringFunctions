@@ -8,6 +8,8 @@ void launchAllUnitTests() {
     unitTestForMyAtoi("123", 123);
     unitTestForMyAtoi("-123", -123);
     unitTestForMyAtoi("0", 0);
+    unitTestForMyAtoi("123kq", 123);
+    unitTestForMyAtoi("kq123", 0);
 
     unitTestForMyItoa(10, 10, "10");
     unitTestForMyItoa(123, 10, "123");
