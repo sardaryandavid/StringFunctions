@@ -78,12 +78,8 @@ int myStrcmp(const char* firstString, const char* secondString) {
     int index = 0;
 
     while(firstString[index] != '\0' && secondString[index] != '\0') {
-         if(firstString[index] > firstString[index]) {
-            return 1;
-        }
-
-        if(firstString[index] < firstString[index]) {
-            return -1;
+         if(firstString[index] != firstString[index]) {
+            return firstString[index] - secondString[index];
         }
 
         ++index;
