@@ -1,6 +1,7 @@
 #include "StringFunctions.h"
 #include <cmath>
 #include <stdio.h>
+#include <cctype>
 #include <cassert>
 #include<algorithm>
 #include <string.h>
@@ -21,7 +22,7 @@ int convertToNumber(const char* enteredString, const int stringLength) {
     int returningNumber = 0;
 
     for(int stringPointer = 0; stringPointer < stringLength; ++stringPointer) {
-        if (!isDigit(enteredString[stringPointer])) {
+        if (!isdigit(enteredString[stringPointer])) {
             return returningNumber;
         }
 
@@ -30,14 +31,6 @@ int convertToNumber(const char* enteredString, const int stringLength) {
     }
 
     return returningNumber;
-}
-
-int isDigit(const char symbol) {
-    if (symbol >= '0' && symbol <= '9') {
-        return 1;
-    }
-
-    return 0;
 }
 
 void myItoa(int number, char* resultString, int base) {
