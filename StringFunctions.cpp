@@ -6,6 +6,8 @@
 #include<algorithm>
 #include <string.h>
 
+const int MAXLENGTH = 1E5;
+
 int myAtoi(const char* enteredString) {
     int stringLength = strlen(enteredString);
 
@@ -33,7 +35,12 @@ int convertToNumber(const char* enteredString, const int stringLength) {
     return returningNumber;
 }
 
-void myItoa(int number, char* resultString, int base) {
+char* myItoa(int number, const int base) {
+    char* resultString = (char*) calloc(MAXLENGTH+1, sizeof(char));
+    char* returningResultString = (char*) calloc(MAXLENGTH+1, sizeof(char));
+
+    returningResultString = resultString;
+
     int digitsAmount = amountOfDigits(number);
 
     int endOfDigits = digitsAmount;
@@ -50,6 +57,8 @@ void myItoa(int number, char* resultString, int base) {
         number = number % int(pow(base, digitsAmount - 1));
         --digitsAmount;
     }
+
+    return returningResultString;
 }
 
 int amountOfDigits(int number) {

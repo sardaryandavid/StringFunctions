@@ -1,21 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "tests.h"
 #include "StringFunctions.h"
 
-const int MAXLENGTH = 1e5;
+//#define TESTS
+
+
 
 void launchProgram();
 
 int main()
 {
+#ifdef TESTS
+    launchAllUnitTests();
+#else
     launchProgram();
+#endif // TESTS
 
     return 0;
 }
 
 void launchProgram() {
-    printf("Use functions from StringFunctions!\)");
+    printf("Use functions from StringFunctions! /%)");
 }
 
 

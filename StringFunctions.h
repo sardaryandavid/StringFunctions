@@ -22,7 +22,7 @@ int convertToNumber(const char* str, const int stringLength);
  * @param [in] base - the system of numeration
  * @param [out] str - string. Into this string we put the converted number
 */
-void myItoa(int number, char * str, int base);
+char* myItoa(int number, const int base);
 
 /**
  * This function counts the number of digits
