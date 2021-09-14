@@ -14,7 +14,7 @@ int myAtoi(const char* enteredString) {
     int startIndex = 0;
 
     if (enteredString[startIndex] == '-') {
-        return -convertToNumber(enteredString + 1, stringLength); // TODO!!!!!!
+        return -convertToNumber(enteredString + 1, stringLength);
     }
 
     return convertToNumber(enteredString, stringLength);
@@ -23,25 +23,23 @@ int myAtoi(const char* enteredString) {
 int convertToNumber(const char* enteredString, const int stringLength) {
     int returningNumber = 0;
 
-    for(int stringPointer = 0; stringPointer < stringLength; ++stringPointer) {
-        if (!isdigit(enteredString[stringPointer])) {
+    for(int index = 0; index < stringLength; ++index) { // TODO!!!
+        if (!isdigit(enteredString[index])) {
             return returningNumber;
         }
 
         returningNumber *= 10;
-        returningNumber += enteredString[stringPointer] - '0';
+        returningNumber += enteredString[index] - '0';
     }
 
     return returningNumber;
 }
 
 char* myItoa(int number, const int base) {
-    char* resultString = (char*) calloc(MAXLENGTH+1, sizeof(char));
-    char* returningResultString = (char*) calloc(MAXLENGTH+1, sizeof(char));
-
-    returningResultString = resultString;
-
     int digitsAmount = amountOfDigits(number);
+
+    char* resultString = (char*) calloc(digitsAmount + 2, sizeof(char)); // for '\0' and '-'
+    char* returningResultString = resultString;
 
     int endOfDigits = digitsAmount;
 
@@ -50,6 +48,7 @@ char* myItoa(int number, const int base) {
     }
 
     for(int index = 0; index < endOfDigits; ++index) {
+
         int digit = abs(number) / pow(base, digitsAmount - 1);
 
         *resultString++ = digit + '0';
@@ -80,7 +79,7 @@ int myStrcmp(const char* firstString, const char* secondString) {
     int index = 0;
 
     while(firstString[index] != '\0' && secondString[index] != '\0') {
-         if(firstString[index] != firstString[index]) {
+         if(firstString[index] != secondString[index]) {
             return firstString[index] - secondString[index];
         }
 
