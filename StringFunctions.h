@@ -51,4 +51,12 @@ int myStrcmp(const char* firstString, const char* secondString);
  *              Otherwise it returns positive number
 */
 int myPuts(const char* str);
+
+char* strdup(char* str);
+
+int myGetline(char* str, const int maxLengthOfLine);
+
+int myStrlen(char* str);
+
+void myStrcpy(char* copyOfStr, char* str);
 #endif // STRINGFUNCTIONS_H_INCLUDED

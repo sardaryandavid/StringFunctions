@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <cctype>
 #include <cassert>
-#include<algorithm>
+#include <algorithm>
 #include <string.h>
 
 const int MAXLENGTH = 1E5;
@@ -97,3 +97,42 @@ int myPuts(const char* str) {
     return EOF;
 }
 
+int myGetline(char* str, const int maxLengthOfLine) {
+    int lengthOfLine = 0;
+    int c;
+
+    while((c = getchar()) != '\n' && lengthOfLine < maxLengthOfLine - 1) {
+        *str++ = c;
+        ++lengthOfLine;
+    }
+
+    *(++str) = '\0';
+
+    return lengthOfLine;
+}
+
+char* strdup(char* str) {
+    char* copyOfStr = (char*) calloc(myStrlen(str) + 1, sizeof(*str));
+
+    if(copyOfStr != nullptr) {
+        myStrcpy(copyOfStr, str);
+    }
+
+    return copyOfStr;
+}
+
+int myStrlen(char* str) {
+    int lengthOfStr = 0;
+
+    while(*str++ != '\0') {
+        ++lengthOfStr;
+    }
+
+    return lengthOfStr;
+}
+
+void myStrcpy(char* copyOfStr, char* str) {
+    while((*copyOfStr++ = *str++) != '\0') {
+        /* empty body */
+    }
+}
