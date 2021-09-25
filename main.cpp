@@ -4,6 +4,8 @@
 #include "tests.h"
 #include "StringFunctions.h"
 
+#include <iostream>
+
 //#define TESTS
 
 void launchProgram();
@@ -22,9 +24,6 @@ int main()
 }
 
 void launchProgram() {
-    char* s= "ABCDEF";
-    char* p = strdup(s);
-    printf("%s\n", p);
     printf("Use functions from StringFunctions!");
 }
 

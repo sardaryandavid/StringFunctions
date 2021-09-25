@@ -97,16 +97,24 @@ int myPuts(const char* str) {
     return EOF;
 }
 
-int myGetline(char* str, const int maxLengthOfLine) {
+int myGetline(char** ptrOnStr, int* maxLengthOfLine, FILE* stream) {
     int lengthOfLine = 0;
-    int c;
+    int symbol;
 
-    while((c = getchar()) != '\n' && lengthOfLine < maxLengthOfLine - 1) {
-        *str++ = c;
+    while((symbol = getchar()) != '\n') {
+        *(*ptrOnStr)++ = symbol;
         ++lengthOfLine;
+
+        if(lengthOfLine > *maxLengthOfLine) {
+            char* ptrOnNewMemory = (char*) calloc(lengthOfLine * 2, sizeof(int));
+            strcpy(ptrOnNewMemory, *ptrOnStr);
+            ptrOnStr = &ptrOnNewMemory;
+            *maxLengthOfLine = 2 * lengthOfLine;
+        }
+
     }
 
-    *(++str) = '\0';
+    *((*ptrOnStr)++) = '\0';
 
     return lengthOfLine;
 }

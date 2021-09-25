@@ -1,6 +1,8 @@
 #ifndef STRINGFUNCTIONS_H_INCLUDED
 #define STRINGFUNCTIONS_H_INCLUDED
 
+#include <cstdio>
+
 /**
  * This function convert string (type: string) into number (type: int)
  * @param [in] array, which you want to convert
@@ -54,7 +56,7 @@ int myPuts(const char* str);
 
 char* strdup(char* str);
 
-int myGetline(char* str, const int maxLengthOfLine);
+int myGetline(char** ptrOnStr, int* maxLengthOfLine, FILE* stream);
 
 int myStrlen(char* str);
 
