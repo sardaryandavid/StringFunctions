@@ -24,7 +24,7 @@ int convertToNumber(const char* enteredString, const int stringLength) {
     int returningNumber = 0;
 
     for(int index = 0; index < stringLength; ++index) { // TODO!!!
-        if (!isdigit(enteredString[index])) {
+        if (!isdigit(*(enteredString + index))) {
             return returningNumber;
         }
 
@@ -98,8 +98,10 @@ int myPuts(const char* str) {
 }
 
 int myGetline(char** ptrOnStr, int* maxLengthOfLine, FILE* stream) {
+    assert(ptrOnStr != nullptr);
+
     int lengthOfLine = 0;
-    int symbol;
+    int symbol = 0;
 
     while((symbol = getchar()) != '\n') {
         *(*ptrOnStr)++ = symbol;
