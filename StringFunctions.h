@@ -26,12 +26,14 @@ int convertToNumber(const char* str, const int stringLength);
 */
 char* myItoa(int number, const int base);
 
+void myReverse(char* str);
+
 /**
  * This function counts the number of digits
  * @param [in] The number in which we want to know the amount of digits
  * @param [out] number of digits
 */
-int amountOfDigits(int number);
+int amountOfDigits(int number, const int base);
 
 /**
  * This function compare to strings. If both string are equal it

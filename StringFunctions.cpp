@@ -23,7 +23,7 @@ int myAtoi(const char* enteredString) {
 int convertToNumber(const char* enteredString, const int stringLength) {
     int returningNumber = 0;
 
-    for(int index = 0; index < stringLength; ++index) { // TODO!!!
+    for (int index = 0; index < stringLength; ++index) {
         if (!isdigit(*(enteredString + index))) {
             return returningNumber;
         }
@@ -36,31 +36,60 @@ int convertToNumber(const char* enteredString, const int stringLength) {
 }
 
 char* myItoa(int number, const int base) {
-    int digitsAmount = amountOfDigits(number);
+    int isNegative = 0;
+    int digitsAmount = 0;
 
-    char* resultString = (char*) calloc(digitsAmount + 2, sizeof(char)); // for '\0' and '-'
-    char* returningResultString = resultString;
-
-    int endOfDigits = digitsAmount;
-
-    if(number < 0) {
-        *resultString++ = '-';
+    if (number < 0) {
+        isNegative = 1;
+        digitsAmount = amountOfDigits(-number, base);
     }
 
-    for(int index = 0; index < endOfDigits; ++index) {
+    else {
+        digitsAmount = amountOfDigits(number, base);
+    }
 
-        int digit = abs(number) / pow(base, digitsAmount - 1);
+    char* resultString = (char*) calloc(digitsAmount + 2, sizeof(*resultString)); // for '\0' and '-'
+    char* returningResultString = resultString;
 
-        *resultString++ = digit + '0';
+    if (isNegative) {
+        *resultString++ = '-';
+        number = -number;
+    }
 
-        number = number % int(pow(base, digitsAmount - 1));
-        --digitsAmount;
+    while (number > 0) {
+        *resultString++ = number % base + '0';
+        number /= base;
+    }
+
+    if (isNegative) {
+        myReverse(returningResultString + 1);
+    }
+
+    else {
+       myReverse(returningResultString);
     }
 
     return returningResultString;
 }
 
-int amountOfDigits(int number) {
+void myReverse(char* str) {
+    size_t strLen = strlen(str);
+    char* tmpStr = (char*) calloc(strLen, sizeof(*tmpStr));
+
+    int index = strLen - 1; //почему с size_t не работало
+    int i = 0;
+
+    while (index >= 0) {
+        *(tmpStr + i++) = *(str + index);
+        --index;
+    }
+
+    for(int i = 0; i < strLen; ++i) {
+        *(str + i) = *(tmpStr + i);
+    }
+}
+
+int amountOfDigits(int number, const int base) {
     if (number == 0) {
         return 1;
     }
@@ -69,7 +98,7 @@ int amountOfDigits(int number) {
 
     while (number != 0) {
         ++counter;
-        number /= 10;
+        number /= base;
     }
 
     return counter;
@@ -78,8 +107,8 @@ int amountOfDigits(int number) {
 int myStrcmp(const char* firstString, const char* secondString) {
     int index = 0;
 
-    while(firstString[index] != '\0' && secondString[index] != '\0') {
-         if(firstString[index] != secondString[index]) {
+    while (firstString[index] != '\0' && secondString[index] != '\0') {
+         if (firstString[index] != secondString[index]) {
             return firstString[index] - secondString[index];
         }
 
@@ -103,15 +132,17 @@ int myGetline(char** ptrOnStr, int* maxLengthOfLine, FILE* stream) {
     int lengthOfLine = 0;
     int symbol = 0;
 
-    while((symbol = getchar()) != '\n') {
+    while ((symbol = getchar()) != '\n') {
         *(*ptrOnStr)++ = symbol;
         ++lengthOfLine;
 
-        if(lengthOfLine > *maxLengthOfLine) {
+        if (lengthOfLine > *maxLengthOfLine) {
             char* ptrOnNewMemory = (char*) calloc(lengthOfLine * 2, sizeof(int));
             strcpy(ptrOnNewMemory, *ptrOnStr);
             ptrOnStr = &ptrOnNewMemory;
             *maxLengthOfLine = 2 * lengthOfLine;
+            //second variant:
+            //char* ptrOnNewMemory = (char*) realloc(ptrOnStr, sizeof(*ptrOnStr));
         }
 
     }
@@ -124,7 +155,7 @@ int myGetline(char** ptrOnStr, int* maxLengthOfLine, FILE* stream) {
 char* strdup(char* str) {
     char* copyOfStr = (char*) calloc(myStrlen(str) + 1, sizeof(*str));
 
-    if(copyOfStr != nullptr) {
+    if (copyOfStr != nullptr) {
         myStrcpy(copyOfStr, str);
     }
 
@@ -134,7 +165,7 @@ char* strdup(char* str) {
 int myStrlen(char* str) {
     int lengthOfStr = 0;
 
-    while(*str++ != '\0') {
+    while (*str++ != '\0') {
         ++lengthOfStr;
     }
 
@@ -142,7 +173,7 @@ int myStrlen(char* str) {
 }
 
 void myStrcpy(char* copyOfStr, char* str) {
-    while((*copyOfStr++ = *str++) != '\0') {
+    while ((*copyOfStr++ = *str++) != '\0') {
         /* empty body */
     }
 }
